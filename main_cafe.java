@@ -15,7 +15,7 @@ public class main_cafe {
             int pilihMenu = sc.nextInt();
             System.out.println();
 
-            if (pilihMenu < 1 || pilihMenu > 4) {
+            if (pilihMenu < 1 || pilihMenu > 3) {
                 System.out.println("Pilihan Menu Tidak Valid! Tolong Input Ulang.");
                 continue;
             }
