@@ -124,6 +124,11 @@ public class main_cafe {
                     continue;
             }
 
+            if (pesananCount >= pesanan[pelangganCount].length) {
+                System.out.println("Tidak dapat menambahkan lebih banyak pesanan. Batas maksimum tercapai.");
+                break;
+            }
+
             System.out.print("Masukkan jumlah item untuk " + namaMenu + ": ");
 
             if (!sc.hasNextInt()) {
@@ -136,7 +141,7 @@ public class main_cafe {
             sc.nextLine();
 
             if (jumlahItem <= 0) {
-                System.out.println("Jumlah item harus lebih dari 0. Silakan coba lagi.");
+                System.out.println("Jumlah item harus lebih dari 0.");
                 continue;
             }
 

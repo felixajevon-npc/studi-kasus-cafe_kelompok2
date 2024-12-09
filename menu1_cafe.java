@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class menucafe {
+public class menu1_cafe {
    public static void menu() {
     Scanner sc = new Scanner(System.in);
     System.out.print("\nMasukkan nama pelanggan: ");
