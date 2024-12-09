@@ -4,19 +4,18 @@ public class main_cafe {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        boolean ulang = true;
+        boolean loop = true;
 
-        while (ulang) {
-            System.out.println("=== MENU UTAMA ===");
+        while (loop) {
+            System.out.println("\n=== MENU UTAMA ===");
             System.out.println("1. Tambahkan Pesanan");
             System.out.println("2. Tampilkan Daftar Pesanan");
             System.out.println("3. Keluar");
             System.out.print("Pilih menu (1-3) : ");
             int pilihMenu = sc.nextInt();
-            System.out.println();
 
             if (pilihMenu < 1 || pilihMenu > 3) {
-                System.out.println("Pilihan Menu Tidak Valid! Tolong Input Ulang.");
+                System.out.println("Pilihan Menu Tidak Valid!");
                 continue;
             }
 
@@ -25,14 +24,14 @@ public class main_cafe {
                     tambahPesanan();
                     break;
                 case 2:
-                    // tampilkanDaftarKRS();
+
                     break;
                 case 3:
-                    System.out.print("Apakah Anda Yakin Ingin Keluar? (y/n): ");
+                    System.out.print("\nApakah Anda Yakin Ingin Keluar? (y/n): ");
                     sc.nextLine();
                     String konfirmasi = sc.nextLine();
                     if (konfirmasi.equalsIgnoreCase("y")) {
-                        ulang = false;
+                        loop = false;
                         System.out.println("Program Selesai.");
                     } else {
                         System.out.println("Kembali ke Menu Utama.");
@@ -44,57 +43,99 @@ public class main_cafe {
 
     public static void tambahPesanan() {
         Scanner sc = new Scanner(System.in);
+
         System.out.print("\nMasukkan nama pelanggan: ");
         String namaPelanggan = sc.nextLine();
-        System.out.print("Masukkan nomor meja: ");
-        int nomorMeja = sc.nextInt();
+
+        boolean inputValidMeja = false;
+        int nomorMeja = -1;
+
+        while (!inputValidMeja) {
+            System.out.print("\nMasukkan nomor meja : ");
+
+            if (sc.hasNextInt()) {
+                nomorMeja = sc.nextInt();
+                if (nomorMeja > 0) {
+                    inputValidMeja = true;
+                } else {
+                    System.out.println("Nomor meja tidak boleh negatif atau 0.");
+                }
+            } else {
+                System.out.println("Input harus angka.");
+                sc.next();
+            }
+        }
 
         int totalHarga = 0;
 
         while (true) {
-            System.out.println(" ===== MENU UTAMA ===== ");
-            System.out.println(" 1. Kopi Hitam -- Rp 15000");
-            System.out.println(" 2. Latte -- Rp 22000 ");
-            System.out.println(" 3. Teh Tarik -- Rp 12000");
-            System.out.println(" 4. Mie Goreng -- Rp 18000");
-
+            System.out.println("\n===== MENU UTAMA =====");
+            System.out.println("1. Kopi Hitam -- Rp 15000");
+            System.out.println("2. Latte -- Rp 22000");
+            System.out.println("3. Teh Tarik -- Rp 12000");
+            System.out.println("4. Mie Goreng -- Rp 18000");
             System.out.print("Pilih menu (masukkan nomor menu atau 0 untuk selesai): ");
+
+            if (!sc.hasNextInt()) {
+                System.out.println("Input tidak valid.");
+                sc.next();
+                continue;
+            }
+
             int pilihMenu = sc.nextInt();
+            sc.nextLine();
 
-            if (pilihMenu == 0)
+            if (pilihMenu == 0) {
                 break;
+            }
 
-            String namaMenu = sc.nextLine();
-            int hargaMenu = sc.nextInt();
-            int jumlahItem = sc.nextInt();
+            String namaMenu = "";
+            int hargaMenu = 0;
 
             switch (pilihMenu) {
                 case 1:
                     namaMenu = "Kopi Hitam";
                     hargaMenu = 15000;
-                    System.out.print("Masukkan jumlah item untuk Kopi Hitam: ");
-                    int jmlKopi = sc.nextInt();
                     break;
                 case 2:
                     namaMenu = "Latte";
                     hargaMenu = 22000;
-                    System.out.print("Masukkan jumlah item untuk Latte: ");
+                    break;
                 case 3:
                     namaMenu = "Teh Tarik";
                     hargaMenu = 12000;
-                    System.out.print("Masukkan jumlah item untuk Teh Tarik: ");
+                    break;
                 case 4:
                     namaMenu = "Mie Goreng";
                     hargaMenu = 18000;
-                    System.out.print("Masukkan jumlah item untuk Mie Goreng: ");
                     break;
                 default:
-                    System.out.println("Selesai.");
-                    break;
+                    System.out.println("Pilihan menu tidak valid.");
+                    continue;
             }
-            totalHarga = jumlahItem * hargaMenu;
-            System.out.println("Pesanan berhasil ditambahkan.");
-            System.out.println("Total harga pesanan: " + totalHarga);
+
+            System.out.print("Masukkan jumlah item untuk " + namaMenu + ": ");
+
+            if (!sc.hasNextInt()) {
+                System.out.println("Jumlah item harus berupa angka.");
+                sc.next();
+                continue;
+            }
+
+            int jumlahItem = sc.nextInt();
+            sc.nextLine();
+
+            if (jumlahItem <= 0) {
+                System.out.println("Jumlah item harus lebih dari 0. Silakan coba lagi.");
+                continue;
+            }
+
+            totalHarga += jumlahItem * hargaMenu;
+            System.out.println(jumlahItem + " x " + namaMenu + " berhasil ditambahkan.");
         }
+
+        System.out.println("\nPesanan untuk " + namaPelanggan + " (Meja " + nomorMeja + ") berhasil disimpan.");
+        System.out.printf("Total harga pesanan: Rp %,d%n", totalHarga);
+        System.out.println();
     }
 }
