@@ -205,7 +205,8 @@ public class main_cafe {
                 }
 
                 totalHarga += hargaMenu * jumlah[i][j];
-                System.out.println("- " + namaMenu + " x " + jumlah[i][j] + " = Rp " + (hargaMenu * jumlah[i][j]));
+                System.out.println("- " + namaMenu + " (" + String.format("Rp %,d", hargaMenu) + ") x " + jumlah[i][j]
+                        + " = Rp " + String.format("%,d", hargaMenu * jumlah[i][j]));
             }
             System.out.printf("Total Harga : Rp %,d%n", totalHarga);
             System.out.println("--------------------------------------------------");
